@@ -13,7 +13,7 @@ import numpy as np
 
 
 # Define the path to the unzipped data files
-path_to_data='./data'
+path_to_data='../data'
 
 
 #Function to convert the utc timestamp to datetime
@@ -54,8 +54,8 @@ p_cols = list(pow_test.columns)
 p_cols.remove('mars_time_of_year')
 
 # Let's have a look at the data, power values aggregated by day
-pow_train[p_cols].resample('1D').mean().plot(legend=False)
-plt.show()
+#pow_train[p_cols].resample('1D').mean().plot(legend=False)
+#plt.show()
 
 # Defining the evaluation metric
 def RMSE(val, pred):
