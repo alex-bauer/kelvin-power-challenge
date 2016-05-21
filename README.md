@@ -7,7 +7,7 @@ I am publishing some baseline scripts to encourage more people to join the Kelvi
 #### Prerequites
 - Python 2.7
 - Numpy
-- Pandas
+- Pandas (I am using 0.18, if you cannot upgrade you need to change .resample() methods to old syntax)
 - Matplotlib
 
 A convenient way to get all prerequisites is to install the [Anaconda](https://www.continuum.io/downloads) Python distribution.
