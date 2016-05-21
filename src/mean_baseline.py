@@ -75,7 +75,7 @@ for p in p_cols:
 print 'Baseline mean prediction,  RMSE: ', RMSE(pow_val[p_cols], pow_pred[p_cols])
 
 # 0.1278 not so bad for a start, let's predict for test set and prepare the submission
-pow_train = pd.concat([pow_train1, pow_train2, pow_train2])
+pow_train = pd.concat([pow_train1, pow_train2, pow_train3])
 
 # Let's take the submission file as a template and put the trainset mean in each column
 pow_pred = pow_test.copy()
