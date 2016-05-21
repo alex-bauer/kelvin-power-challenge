@@ -17,7 +17,8 @@ A convenient way to get all prerequisites is to install the [Anaconda](https://w
 1. Clone the repository using git: `git clone https://github.com/alex-bauer/kelvin-power-challenge.git`
 2. Download data file from [competition website](https://kelvins.esa.int/mars-express-power-challenge/data/) and unpack to data folder
 
-#### Generate baseline solution
+#### Generate baseline solutions
 
 3. Run `python mean_baseline.py`
+4. Run `python rf_baseline.py` (0.12 PLB)
 
