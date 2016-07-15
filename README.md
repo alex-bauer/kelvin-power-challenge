@@ -4,7 +4,7 @@ I am publishing some baseline scripts to encourage more people to join the Kelvi
 
 ### Instructions
 
-#### Prerequites
+#### Prerequisites
 - Python 2.7
 - Numpy
 - Pandas

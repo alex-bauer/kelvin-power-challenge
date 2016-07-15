@@ -14,7 +14,7 @@ import numpy as np
 # Define the path to the unzipped data files
 from sklearn.ensemble import RandomForestRegressor
 
-path_to_data = './data'
+path_to_data = '../data'
 
 
 # Function to convert the utc timestamp to datetime
