@@ -1,6 +1,6 @@
 # kelvin-power-challenge
 
-I am publishing some baseline scripts to encourage more people to join the Kelvin Mars Power Challenge. I am starting with a simple mean baseline. I plan to extend the repository with more advanced scripts over time.
+A baseline solution and visualization tools for [Kelvin Mars Power Challenge](https://kelvins.esa.int/mars-express-power-challenge/).
 
 ### Instructions
 
@@ -20,5 +20,5 @@ A convenient way to get all prerequisites is to install the [Anaconda](https://w
 #### Generate baseline solutions
 
 3. Run `python mean_baseline.py`
-4. Run `python rf_baseline.py` (0.12 PLB)
+4. Run `python rf_baseline.py` (0.12 on public leaderboard)
 
