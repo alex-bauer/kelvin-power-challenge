@@ -59,7 +59,6 @@ target = target.join(height_vector(r'(\d+)_KM_(.+)','evtf_height'))
 evtf_out=target.drop(config.target_cols, axis=1)
 evtf_out.fillna(method='ffill').fillna(method='bfill').to_pickle(config.features_folder+'/evtf_states.pkl')
 
-test_df(target)
 
 
 
