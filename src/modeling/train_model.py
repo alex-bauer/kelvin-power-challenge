@@ -2,6 +2,8 @@ import sys
 
 from sklearn.ensemble import RandomForestRegressor
 
+from src.modeling.models import train_predict
+
 sys.path.append("../")
 import pandas as pd
 from utils.utils import *
@@ -40,27 +42,18 @@ for ix, (start_date, end_date) in enumerate(config.folds):
     X_train_cv, Y_train_cv = X_train.ix['2000-12-12':start_date], Y_train.ix['2000-12-12':start_date]
     X_val_cv, Y_val_cv = X_train.ix[start_date:end_date], Y_train.ix[start_date:end_date]
 
-    # Here comes the machine learning
-    rf = RandomForestRegressor(n_estimators=params['n_estimators'], n_jobs=-1,
-                               min_samples_leaf=params['min_samples_leaf'])
-    rf.fit(X_train_cv, Y_train_cv)
-    Y_val_cv_hat = rf.predict(X_val_cv)
+
+    Y_val_cv_hat= train_predict(params, X_train_cv, Y_train_cv, X_val_cv)
+
     oobs.append(Y_val_cv)
     # Showing the local prediction error and feature importances
     loss = RMSE(Y_val_cv, Y_val_cv_hat)
     losses.append(loss)
     print 'Fold', ix, loss
 
-print "Feature importances:"
-for feature, importance in sorted(zip(rf.feature_importances_, X_train.columns), key=lambda x: x[0], reverse=True):
-    print feature, importance
-
 print "CV Loss:", np.mean(losses)
 
-# Now we do the training and prediction for the testset
-rf.fit(X_train, Y_train)
-Y_test_hat = rf.predict(X_test)
-
+Y_test_hat=train_predict(params, X_train, Y_train, X_test)
 # Preparing the submission file:
 
 # Converting the prediction matrix to a dataframe
