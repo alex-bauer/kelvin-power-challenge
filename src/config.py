@@ -23,9 +23,7 @@ class ParamConfig:
 
         self.log_folder = "../../log/"
 
-        self.folds = [(datetime(2009, 01, 01), datetime(2009, 12, 31)),
-                      (datetime(2010, 01, 01), datetime(2010, 12, 31)),
-                      (datetime(2011, 01, 01), datetime(2011, 12, 31)),
+        self.folds = [(datetime(2011, 01, 01), datetime(2011, 12, 31)),
                       (datetime(2012, 01, 01), datetime(2012, 12, 31)),
                       (datetime(2013, 01, 01), datetime(2013, 12, 31))]
 
