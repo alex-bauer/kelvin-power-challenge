@@ -3,11 +3,23 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Activation, Dense
 from keras.layers.recurrent import LSTM as kerasLSTM
+from keras.layers.recurrent import GRU
+from keras.layers.wrappers import TimeDistributed
 import math
 #, BatchNormalization
 
 import pandas as pd  
 from random import random   
+
+def slidingWindow(X,windowSize = 10, numWindows=-1):
+    if numWindows == -1:
+        numWindows = len(X)-windowSize
+    print("Generating %d windows" % numWindows)
+    i = 0
+    while i <= numWindows:
+        #yield list(np.array(X[i:i+windowSize]))
+        yield list(X.iloc[i:i+windowSize].values)
+        i += windowSize
 
 class LSTM:
     def __init__(self,params):
@@ -32,7 +44,7 @@ class LSTM:
         num_batches = int(math.floor(data.shape[0] / batch_size))
         #print "num batches:",num_batches
         batches = [] 
-        batch = np.zeros((batch_size,sequence_length,data.shape[1]))
+        batch = np.zeros((batch_size,sequence_legth,data.shape[1]))
         for nb in range(num_batches):
             for ex in range(batch_size):
                 index = nb * batch_size + ex
@@ -81,22 +93,73 @@ class LSTM:
         print " output_dim (Y)",output_dim
         print " batch_size",batch_size
         
-        dataX = self.prepare_data(X_train,sequence_length)
+        #print X_train.columns
+        
+        #print X_train.head()
+        
+        #print Y_train.columns
+        #print X_train.iloc[0:20,0]
+        print "X_train len", len(X_train.index)
+        
+        start =  len(X_train.index) % (batch_size*sequence_length)
+        
+        X_train_Window_Generator = slidingWindow(X_train.iloc[start:], sequence_length)#, 10, 1)
+        Y_train_Window_Generator = slidingWindow(Y_train.iloc[start:], sequence_length)#, 10, 1)
+        
+       
+        
+        # create a batch
+        
+        
+        
+        
+        
+        #dataX = self.prepare_data(X_train,sequence_length)
         #batchesY = self.prepare_data(Y_train,sequence_length)
         #dataY = Y_train.iloc[:dataX.shape[0]].as_matrix()
-        dataY = Y_train.as_matrix()
+        #dataY = Y_train.as_matrix()
         
         #print " x shape ",dataX.shape
         #print " y shape ",dataY.shape
         
         print('Build model...')
-        self.model = Sequential()
-        self.model.add(kerasLSTM(num_units, return_sequences=True, input_shape=(sequence_length, input_dim)))
-        self.model.add(kerasLSTM(num_units, return_sequences=False))
-        self.model.add(Dense(output_dim,activation="linear"))  
-        #self.model.add(Activation())  
-        self.model.compile(loss="mean_squared_error", optimizer="rmsprop")  
-        self.model.fit(dataX, dataY, batch_size=batch_size, nb_epoch=self.params['n_epochs'], validation_split=0)
+                        
+        if 0:
+            self.model = Sequential()
+            self.model.add(kerasLSTM(num_units, return_sequences=True, input_shape=(sequence_length, input_dim)))
+            #self.model.add(kerasLSTM(num_units, return_sequences=False))
+            self.model.add(TimeDistributed(Dense(output_dim,activation="relu")))
+            self.model.add(Dense(output_dim,activation="linear"))  
+            #self.model.add(Activation())  
+            self.model.compile(loss="mean_squared_error", optimizer="rmsprop")  
+            self.model.fit(dataX, dataY, batch_size=batch_size, nb_epoch=self.params['n_epochs'], validation_split=0)
+            
+        # model without input normalization - does not converge
+        model = Sequential()
+        model.add(GRU(num_units, batch_input_shape=(batch_size,sequence_length,input_dim), return_sequences=True, stateful=True))
+        model.add(TimeDistributed(Dense(32, activation='sigmoid')))
+        model.add(TimeDistributed(Dense(output_dim, activation='linear')))
+        #model.add(Activation('sigmoid'))
+
+        # self.model.add(LSTM(Final_outputdim, input_dim=inputdim, return_sequences = True ))
+
+        model.compile(loss='mse', optimizer='rmsprop')
+
+        #X_seq=list(X_generator)
+        #Y_seq=list(Y_generator)
+              
+        
+        X_seq = list(X_train_Window_Generator)
+        Y_seq = list(Y_train_Window_Generator)
+        
+        #print X_seq[0].shape
+        #print X_seq[1].shape
+        
+        model.fit(X_seq,Y_seq,
+                       batch_size=batch_size,
+                       verbose=1,
+                       nb_epoch=1,
+                       shuffle=False)
 
     def predict(self,X_valid):
         dataX = self.prepare_data(X_valid,self.params['sequence_length'])
