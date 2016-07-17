@@ -167,4 +167,4 @@ class LSTM:
     def predict(self,X_valid):
         dataX = self.prepare_data(X_valid,self.params['sequence_length'])
         print " x shape ",dataX.shape
-        return model.predict(dataX,batch_size = self.params['batch_size'],verbose=1)
+        return self.model.predict(dataX,batch_size = self.params['batch_size'],verbose=1)
