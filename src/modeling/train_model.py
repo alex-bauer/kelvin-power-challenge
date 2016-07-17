@@ -2,14 +2,18 @@ import sys
 
 from sklearn.ensemble import RandomForestRegressor
 
-from src.modeling.models import train_predict
+from models import train_predict
 
 sys.path.append("../")
 import pandas as pd
 from utils.utils import *
 from config import config
 
+
 params = {"features": ["ltdata.pkl", "saaf.pkl"], "model": "rf", "n_estimators": 100, "min_samples_leaf": 5}
+
+# for lstm:
+#params = {"features": ["ltdata.pkl", "saaf.pkl"], "model": "lstm",  "num_units": 64, 'sequence_length':8,'batch_size':64,'n_epochs':10}
 
 power = pd.read_pickle(config.data_folder + '/target.pkl')
 

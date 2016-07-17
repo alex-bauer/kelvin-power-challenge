@@ -10,4 +10,10 @@ def train_predict(params, X_train, Y_train, X_val):
         rf.fit(X_train, Y_train)
         Y_val_cv_hat = rf.predict(X_val)
         return Y_val_cv_hat
-
+    elif params['model'] == "lstm":
+        from lstm import LSTM
+        rnn = LSTM(params)
+        rnn.fit(X_train, Y_train)
+        Y_val_cv_hat = rnn.predict(X_val)
+        
+        return Y_val_cv_hat
