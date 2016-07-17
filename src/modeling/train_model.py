@@ -62,7 +62,8 @@ Y_test_hat=train_predict(params, X_train, Y_train, X_test)
 # Converting the prediction matrix to a dataframe
 Y_test_hat = pd.DataFrame(Y_test_hat, index=X_test.index, columns=power_cols)
 # We need to convert the parsed datetime back to utc timestamp
-Y_test_hat['ut_ms'] = (Y_test_hat.index.astype(np.int64) / 1e6).astype(str)
+Y_test_hat['ut_ms'] = (Y_test_hat.index.astype(np.int64)/1000000)
+Y_test_hat['ut_ms'] = Y_test_hat['ut_ms'].map(lambda x:'{0:d}'.format(x))
 # Writing the submission file as csv
 Y_test_hat[['ut_ms'] + power_cols].to_csv('submission.csv', index=False)
 
