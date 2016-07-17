@@ -86,6 +86,7 @@ class LSTM:
         input_dim = X_train.shape[1]
         output_dim = Y_train.shape[1]
         batch_size = self.params['batch_size']
+        self.X_train = X_train
         
         print "SPECS:"
         print " num_units (LSTM)",num_units
@@ -156,15 +157,35 @@ class LSTM:
         #print X_seq[0].shape
         #print X_seq[1].shape
         
-        model.fit(X_seq,Y_seq,
-                       batch_size=batch_size,
-                       verbose=1,
-                       nb_epoch=1,
-                       shuffle=False)
+        if 0:
+            model.fit(X_seq,Y_seq,
+                           batch_size=batch_size,
+                           verbose=1,
+                           nb_epoch=1,
+                           shuffle=False)
                         
         self.model = model
         
     def predict(self,X_valid):
-        dataX = self.prepare_data(X_valid,self.params['sequence_length'])
-        print " x shape ",dataX.shape
-        return self.model.predict(dataX,batch_size = self.params['batch_size'],verbose=1)
+        #dataX = self.prepare_data(X_valid,self.params['sequence_length'])
+        batch_size = self.params['batch_size']
+        sequence_length = self.params['sequence_length']
+        # merge the train and the test
+        
+        X_merged = pd.concat([self.X_train, X_valid])
+        print len(X_merged.index)
+        
+        start =  len(X_merged.index) % (batch_size*sequence_length)
+        
+        X_train_Window_Generator = slidingWindow(X_merged.iloc[start:], sequence_length)#, 10, 1)
+        dataX = list(X_train_Window_Generator )
+        #print " x shape ",dataX.shape
+        Y_hat = self.model.predict(dataX,batch_size = batch_size,verbose=1)
+        
+        # now get the tail of Y_hat 
+        Y_hat1 = Y_hat.flatten()
+        res = Y_hat1[-len(X_valid.index)]
+              
+        
+        
+        return res
