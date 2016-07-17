@@ -2,14 +2,14 @@ import sys
 
 from sklearn.ensemble import RandomForestRegressor
 
-from src.modeling.models import train_predict
+from models import train_predict
 
 sys.path.append("../")
 import pandas as pd
 from utils.utils import *
 from config import config
 
-params = {"features": ["ltdata.pkl", "saaf.pkl"], "model": "rf", "n_estimators": 100, "min_samples_leaf": 5}
+params = {"features": ["ltdata.pkl", "saaf.pkl", "dmop_count_1h.pkl", "evtf_states.pkl"], "model": "rf", "n_estimators": 10, "min_samples_leaf": 5}
 
 power = pd.read_pickle(config.data_folder + '/target.pkl')
 
@@ -59,7 +59,7 @@ Y_test_hat=train_predict(params, X_train, Y_train, X_test)
 # Converting the prediction matrix to a dataframe
 Y_test_hat = pd.DataFrame(Y_test_hat, index=X_test.index, columns=power_cols)
 # We need to convert the parsed datetime back to utc timestamp
-Y_test_hat['ut_ms'] = (Y_test_hat.index.astype(np.int64) * 1e-6).astype(int)
+Y_test_hat['ut_ms'] = (Y_test_hat.index.astype(np.int64) / 1e6).astype(str)
 # Writing the submission file as csv
 Y_test_hat[['ut_ms'] + power_cols].to_csv('submission.csv', index=False)
 

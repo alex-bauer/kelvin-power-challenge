@@ -83,7 +83,7 @@ for p in p_cols:
     pow_pred[p] = pow_train[p].mean()
 
 #We need to convert the parsed data back to utc timestamp
-pow_pred['ut_ms'] = (pow_pred.index.astype(np.int64) * 1e-6).astype(int)
+pow_pred['ut_ms'] = (pow_pred.index.astype(np.int64) * 1e-6).astype(str)
 
 #Prepare the submission file
 pow_pred[['ut_ms']+p_cols].to_csv('mean_baseline.csv', index=False)
