@@ -125,20 +125,11 @@ class LSTM:
         #print " y shape ",dataY.shape
         
         print('Build model...')
-                        
-        if 0:
-            self.model = Sequential()
-            self.model.add(kerasLSTM(num_units, return_sequences=True, input_shape=(sequence_length, input_dim)))
-            #self.model.add(kerasLSTM(num_units, return_sequences=False))
-            self.model.add(TimeDistributed(Dense(output_dim,activation="relu")))
-            self.model.add(Dense(output_dim,activation="linear"))  
-            #self.model.add(Activation())  
-            self.model.compile(loss="mean_squared_error", optimizer="rmsprop")  
-            self.model.fit(dataX, dataY, batch_size=batch_size, nb_epoch=self.params['n_epochs'], validation_split=0)
-            
+
         # model without input normalization - does not converge
         model = Sequential()
         model.add(GRU(num_units, batch_input_shape=(batch_size,sequence_length,input_dim), return_sequences=True, stateful=True))
+        model.add(TimeDistributed(Dense(num_units, activation='tanh')))
         model.add(TimeDistributed(Dense(32, activation='sigmoid')))
         model.add(TimeDistributed(Dense(output_dim, activation='linear')))
         #model.add(Activation('sigmoid'))
@@ -181,11 +172,10 @@ class LSTM:
         dataX = list(X_train_Window_Generator )
         #print " x shape ",dataX.shape
         Y_hat = self.model.predict(dataX,batch_size = batch_size,verbose=1)
-        
-        # now get the tail of Y_hat 
-        Y_hat1 = Y_hat.flatten()
-        res = Y_hat1[-len(X_valid.index)]
-              
+
+        # now get the tail of Y_hat
+        Y_hat1 = np.vstack(Y_hat)
+        res = Y_hat1[-len(X_valid.index):, :]
         
         
         return res
