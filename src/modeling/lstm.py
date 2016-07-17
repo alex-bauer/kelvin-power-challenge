@@ -24,6 +24,7 @@ def slidingWindow(X,windowSize = 10, numWindows=-1):
 class LSTM:
     def __init__(self,params):
         self.params = params
+        
         pass
     """    
     def build_batch(self,data,batch_size,sequence_length,index):
@@ -160,8 +161,10 @@ class LSTM:
                        verbose=1,
                        nb_epoch=1,
                        shuffle=False)
-
+                        
+        self.model = model
+        
     def predict(self,X_valid):
         dataX = self.prepare_data(X_valid,self.params['sequence_length'])
         print " x shape ",dataX.shape
-        return self.model.predict(dataX,batch_size = self.params['batch_size'],verbose=1)
+        return model.predict(dataX,batch_size = self.params['batch_size'],verbose=1)
