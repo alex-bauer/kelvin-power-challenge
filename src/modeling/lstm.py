@@ -157,7 +157,7 @@ class LSTM:
         #print X_seq[0].shape
         #print X_seq[1].shape
         
-        if 0:
+        if 1:
             model.fit(X_seq,Y_seq,
                            batch_size=batch_size,
                            verbose=1,
