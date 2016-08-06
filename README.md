@@ -2,6 +2,11 @@
 
 4th place solution of [Kelvin Mars Power Challenge](https://kelvins.esa.int/mars-express-power-challenge/).
 
+## Flowchart
+
+<img src="./fig/workflow.jpg" alt="Flowchart" align="center" width="900px"/>
+
+
 ## Features
 
 ####EVTF:
