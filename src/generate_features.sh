@@ -13,7 +13,7 @@ echo "Creating EVTF"
 python features_evtf_states.py
 
 echo "Creating FTL"
-#python features_ftl_states.py
+python features_ftl_states.py
 
 echo "Creating LTDATA"
 python features_ltdata.py
