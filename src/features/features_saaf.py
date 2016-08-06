@@ -34,18 +34,18 @@ saaf_all = pd.concat([saaf_train, saaf_test])
 
 #Binary indicator for solar conjunction
 saaf_all['conjunction']=0
-saaf_all.loc['2008-11-16':'2008-12-20']['conjunction']=1
-saaf_all.loc['2011-01-17':'2011-02-20']['conjunction']=1
-saaf_all.loc['2013-03-28':'2013-05-05']['conjunction']=1
-saaf_all.loc['2015-05-27':'2015-07-01']['conjunction']=1
+saaf_all.loc['2008-11-16':'2008-12-20','conjunction']=1
+saaf_all.loc['2011-01-17':'2011-02-20','conjunction']=1
+saaf_all.loc['2013-03-28':'2013-05-05','conjunction']=1
+saaf_all.loc['2015-05-27':'2015-07-01','conjunction']=1
 
 cols=['sa','sx','sy','sz']
 
 #Averages over previous hours
 for col in cols:
     saaf_all[col+'_last_1']=saaf_all[col].shift(-1)
-    saaf_all[col+'_last_3']=pd.rolling_mean(saaf_all[col],3)
-    saaf_all[col+'_last_24']=pd.rolling_mean(saaf_all[col],24)
+    saaf_all[col+'_last_3']=pd.rolling(saaf_all[col],3).mean()
+    saaf_all[col+'_last_24']=pd.rolling(saaf_all[col],24).mean()
 
 
 target = pd.read_pickle(config.data_folder + '/target.pkl')

@@ -40,12 +40,12 @@ target = target.join(state_vector('MAR_UMBRA_START', 'MAR_UMBRA_END', 'evtf_umbr
 target = target.join(state_vector('MAR_PENUMBRA_START', 'MAR_PENUMBRA_END', 'evtf_penumbra'))
 
 def height_vector():
-    heights1=evtf_all['description'].str.match(r'^(\d+)_KM').map(lambda x:x[0] if len(x)>0 else 0).astype(int).copy()
+    heights1=evtf_all['description'].str.extract(r'^(\d+)_KM', expand=False).fillna(0).astype(int).copy()
     heights2=evtf_all['description'].str.contains('APOCENTRE').map(lambda x: 10107 if x else 0).astype(int).copy()
     heights3=evtf_all['description'].str.contains('PERICENTRE').map(lambda x: 298 if x else 0).astype(int).copy()
     heights=heights1+heights2+heights3
     u=heights[heights>0]
-    u=u.resample('60s').interpolate().resample('1H').mean()/10000.0
+    u=u.resample('60s').mean().interpolate().resample('1H').mean()/10000.0
     u=u.to_frame('evtf_height')
     return u
 
