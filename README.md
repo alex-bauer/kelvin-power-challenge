@@ -4,7 +4,7 @@
 
 ## Flowchart
 
-<img src="./fig/workflow.jpg" alt="Flowchart" align="center" width="900px"/>
+<img src="./fig/workflow.png" alt="Flowchart" align="center" width="900px"/>
 
 
 ## Features
