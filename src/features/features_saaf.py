@@ -44,8 +44,8 @@ cols=['sa','sx','sy','sz']
 #Averages over previous hours
 for col in cols:
     saaf_all[col+'_last_1']=saaf_all[col].shift(-1)
-    saaf_all[col+'_last_3']=pd.rolling(saaf_all[col],3).mean()
-    saaf_all[col+'_last_24']=pd.rolling(saaf_all[col],24).mean()
+    saaf_all[col+'_last_3']=saaf_all[col].rolling(3).mean()
+    saaf_all[col+'_last_24']=saaf_all[col].rolling(24).mean()
 
 
 target = pd.read_pickle(config.data_folder + '/target.pkl')
@@ -54,3 +54,5 @@ target = target.join(saaf_all.reindex(target.index, method='nearest'))
 saaf_all = target.drop(config.target_cols, axis=1)
 
 saaf_all.fillna(method='ffill').fillna(method='bfill').to_pickle(config.features_folder + '/saaf.pkl')
+
+print "Done."

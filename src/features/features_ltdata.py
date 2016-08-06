@@ -38,3 +38,4 @@ target = target.join(ltdata_all.reindex(target.index,method='nearest'))
 ltdata_out=target.drop(config.target_cols, axis=1)
 ltdata_out.fillna(method='ffill').fillna(method='bfill').to_pickle(config.features_folder+'/ltdata.pkl')
 
+print "Done."

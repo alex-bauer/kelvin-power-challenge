@@ -54,3 +54,5 @@ def generate_count(grouper, name):
 generate_count(lambda dt: datetime(dt.year, dt.month, dt.day), '24h')
 generate_count(lambda dt: datetime(dt.year, dt.month, dt.day,dt.hour/3), '3h')
 generate_count(lambda dt: datetime(dt.year, dt.month, dt.day, dt.hour), '1h')
+
+print "Done."

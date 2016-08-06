@@ -20,3 +20,4 @@ target.loc['2014-07-08':'2014-11-10','dummy_2551_mode']=1
 ltdata_out=target.drop(config.target_cols, axis=1)
 ltdata_out.to_pickle(config.features_folder+'/dummies.pkl')
 
+print "Done."

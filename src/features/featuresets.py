@@ -34,4 +34,5 @@ def f12():
 
 
 f12()
-exit()
+
+print "Done."
