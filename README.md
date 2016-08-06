@@ -48,7 +48,7 @@ For modeling, I used gradient boosting trees and LSTM using the excellent packag
 
 
 ## Models and performance
-| Submission | Public Leaderboard RMSE | Position |
+| Model | Public Leaderboard RMSE | Position |
 | :-------------------------: | :-----------------------: | :---------------: | 
 | Gradient Boosting Trees (Xgboost) | 0.09015 | **6** |
 | Long-term Short-term (LSTM) recurrent neural nets (Keras) | 0.09096 | **6** |
