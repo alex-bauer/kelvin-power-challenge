@@ -35,10 +35,20 @@
 - Indicator for switching of NPWD2851 based on intuition and guesswork about related DMOP commands
 - Days since 2008
 
-All features are calculated or downsample to the hour. For modeling, I used gradient boosting trees and LSTM using the excellent packages xgboost and keras. I did not do much hyper parameter tuning or feature selection, just built a lot of models with different subsets of features and ensembled them using Caruana's greedy ensemble selection method (also known as hillclimbing). 
+All features are calculated or downsample to the hour. 
+
+## Modeling
+
+For modeling, I used gradient boosting trees and LSTM using the excellent packages xgboost and keras. The predictions from the neural nets differed substantially from the predictions of the tree-based models. The best ensemble was built using a library of models trained on random subsets of features (80%) and ensembled using Caruana's greedy ensemble selection method (also known as hillclimbing). 
+
+
+## Cross validation scheme
+
+<img src="./fig/cv_scheme.png" alt="CV Scheme" align="center" width="900px"/>
+
 
 ## Models and performance
-| Submission | Public LB RMSE | Position |
+| Submission | Public Leaderboard RMSE | Position |
 | :-------------------------: | :-----------------------: | :---------------: | 
 | Gradient Boosting Trees (Xgboost) | 0.09015 | **6** |
 | Long-term Short-term (LSTM) recurrent neural nets (Keras) | 0.09096 | **6** |
@@ -48,7 +58,7 @@ All features are calculated or downsample to the hour. For modeling, I used grad
 
 ## Instructions
 
-#### Step 1. Install Dependencies
+#### Step 1. Install dependencies
 - Python 2.7
 - Numpy
 - Pandas 0.18 (for older verisons you need to change .resample() methods to old syntax)
