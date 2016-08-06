@@ -32,7 +32,7 @@
 ####Custom features:
 - Indicator for solar conjunction
 - Indicator for periods with missing data
-- Indicator for switching of NPWD2851 based on intuition and guesswork about related DMOP commands
+- Indicator for switching of NPWD2851 based on manual inspection of DMOP commands
 - Days since 2008
 
 All features are calculated or downsample to the hour. 
