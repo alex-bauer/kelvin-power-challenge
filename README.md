@@ -7,18 +7,23 @@
 ####EVTF:
 - Indicators for MARS PENUMBRA and UMBRA
 - Interpolated altitude over Mars from APOCENTER and PERICENTER
+
 ####SAAF:
 - All raw variables
 - All raw variables at previous hour
 - All variables averaged over previous 3 and 24 hours
+ 
 ####LTDATA:
 - All raw variables
+-
 ####FTL:
 - Indicator variable per type
 - Indicator variable for comms enabled
+
 ####DMOP:
 - Count of commands per subsystem/hour
 - Sum of all commands per hour
+
 ####Custom features:
 - Indicator for solar conjunction
 - Indicator for periods with missing data
