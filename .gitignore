@@ -1,5 +1,9 @@
-data/
+data/features
+data/models
+data/test_set
+data/train_set
 .idea/
+log/
 .iml
 *.pyc
 *.csv

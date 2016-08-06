@@ -38,7 +38,7 @@ def train_model(params):
         folder = config.models_folder+'/level1/{}/{}/'.format(modelname, params['bag_round'])
         params['random_state'] = (params['bag_round']+4)*10000
     else:
-        folder = config.models_folder+'/level1_/{}'.format(modelname)
+        folder = config.models_folder+'/level1/{}'.format(modelname)
         if not params.has_key('random_state'):
             params['random_state'] = 0
 
