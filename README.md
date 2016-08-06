@@ -2,7 +2,41 @@
 
 4th place solution of [Kelvin Mars Power Challenge](https://kelvins.esa.int/mars-express-power-challenge/).
 
-### Instructions
+## Features
+
+####EVTF:
+- Indicators for MARS PENUMBRA and UMBRA
+- Interpolated altitude over Mars from APOCENTER and PERICENTER
+####SAAF:
+- All raw variables
+- All raw variables at previous hour
+- All variables averaged over previous 3 and 24 hours
+####LTDATA:
+- All raw variables
+####FTL:
+- Indicator variable per type
+- Indicator variable for comms enabled
+####DMOP:
+- Count of commands per subsystem/hour
+- Sum of all commands per hour
+####Custom features:
+- Indicator for solar conjunction
+- Indicator for periods with missing data
+- Indicator for switching of NPWD2851 based on intuition and guesswork about related DMOP commands
+- Days since 2008
+
+All features are calculated or downsample to the hour. For modeling, I used gradient boosting trees and LSTM using the excellent packages xgboost and keras. I did not do much hyper parameter tuning or feature selection, just built a lot of models with different subsets of features and ensembled them using Caruana's greedy ensemble selection method (also known as hillclimbing). 
+
+## Models and performance
+| Submission | Public LB RMSE | Position |
+| :-------------------------: | :-----------------------: | :---------------: | 
+| Gradient Boosting Trees (Xgboost) | 0.09015 | **6** |
+| Long-term Short-term (LSTM) recurrent neural nets (Keras) | 0.09096 | **6** |
+| Deep neural nets (Keras) | 0.09045 | **6** |
+| Best Ensemble (200 models) | 0.08464 | **4** |
+
+
+## Instructions
 
 #### Step 1. Install Dependencies
 - Python 2.7
