@@ -80,3 +80,7 @@ Run `python mean_baseline.py`
 Random Forest baseline:
 4. Run `python rf_baseline.py` (0.12 on public leaderboard)
 
+
+## Acknowledgements
+
+Many thanks to ESA for organizing the competition and providing the data, and many thanks to Sebastian Apel who organized workshops in Frankfurt to discuss ideas and interact with the ESA mission control team.
