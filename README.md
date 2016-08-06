@@ -15,7 +15,7 @@
  
 ####LTDATA:
 - All raw variables
--
+
 ####FTL:
 - Indicator variable per type
 - Indicator variable for comms enabled
