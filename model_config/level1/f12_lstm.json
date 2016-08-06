@@ -1,0 +1,20 @@
+{
+  "modelname": "f12_lstm",
+  "hidden_layers": 1,
+  "learning_rate": 0.02,
+  "batch_size": 32,
+  "sequence_length":24,
+  "alpha": 0.0,
+  "optimizer": "sgd",
+  "hidden_dropout": 0.4,
+  "early_stopping": true,
+  "hidden_units": 512,
+  "nb_epoch": 50,
+  "featureset": "f12",
+  "input_dropout": 0.1,
+  "model": "reg_keras_lstm",
+  "max_evals": 200,
+  "hidden_activation": "relu",
+  "momentum": 0.9,
+  "batch_norm": true
+}

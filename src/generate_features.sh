@@ -1,6 +1,4 @@
 
-
-
 # build features
 
 cd features
@@ -23,16 +21,13 @@ python features_ltdata.py
 echo "Creating SAAF"
 python features_saaf.py
 
-cd ..
+echo "Creating dummies"
+python features_dummies.py
 
-# run the model
+echo "Creating time features"
+python features_time.py
 
-cd modeling
+echo "Compile featuresets"
+python featuresets.py
 
-python train_model.py
-
-
-
-
-
-# 
+echo "Done."

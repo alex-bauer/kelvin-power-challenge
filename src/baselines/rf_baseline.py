@@ -1,20 +1,17 @@
 """
-ESA Kelvins - Mars Explorer Power Prediction Challenge
-
-Random Forest baseline model (using saaf and ltdata)
-
-Author: Alexander Bauer (email@alexander-bauer.com)
-
+Generates baseline solution using random forest regressor
 """
 
-import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
+import sys
+sys.path.append("../")
+from config import *
+
 
 # Define the path to the unzipped data files
 from sklearn.ensemble import RandomForestRegressor
 
-path_to_data = '../data'
+path_to_data = config.dat
 
 
 # Function to convert the utc timestamp to datetime

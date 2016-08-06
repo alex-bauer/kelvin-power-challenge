@@ -35,6 +35,7 @@ dmop_all['device'] = dmop_all['subsystem'].map(lambda x: x[0:4])
 dmop_all['cmd'] = dmop_all['subsystem'].map(lambda x: x[4:])
 
 
+#Generate group statistics per hour
 def generate_count(grouper, name):
     print name
     dmop_all['grp'] = dmop_all.index.map(grouper)
@@ -50,4 +51,6 @@ def generate_count(grouper, name):
     df.fillna(0).to_pickle(config.features_folder + '/dmop_count_' + name + '.pkl')
 
 
+generate_count(lambda dt: datetime(dt.year, dt.month, dt.day), '24h')
+generate_count(lambda dt: datetime(dt.year, dt.month, dt.day,dt.hour/3), '3h')
 generate_count(lambda dt: datetime(dt.year, dt.month, dt.day, dt.hour), '1h')

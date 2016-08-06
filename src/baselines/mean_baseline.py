@@ -1,19 +1,15 @@
 """
-ESA Kelvins - Mars Explorer Power Prediction Challenge
-
-Baseline model (predicting the mean)
-
-Author: Alexander Bauer (email@alexander-bauer.com)
-
+Generates baseline solution using mean power per line
 """
 
-import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
+import sys
+sys.path.append("../")
+from config import *
 
 
 # Define the path to the unzipped data files
-path_to_data='../data'
+path_to_data=config.data_folder
 
 
 #Function to convert the utc timestamp to datetime

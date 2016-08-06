@@ -12,7 +12,7 @@ if not os.path.exists(folder):
     os.makedirs(folder)
 
 
-# Function to read a csv file and resample to hourly consumption
+# Function to read the csv file and converting time
 def parse_ltdata(filename, dropna=True):
     df = pd.read_csv(config.data_folder + '/' + filename)
     df = convert_time(df)

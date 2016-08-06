@@ -11,5 +11,6 @@ conda install numpy pandas matplotlib scikit-learn
 
 # and keras, too
 pip install keras
+pip install xgboost
 
  

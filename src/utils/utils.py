@@ -9,6 +9,16 @@ from config import config
 
 sys.path.append("../")
 
+import os
+def ensure_folder(folder):
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+ensure_folder(config.featuresets_folder)
+ensure_folder(config.log_folder)
+ensure_folder(config.features_folder)
+ensure_folder(config.models_folder)
+
 # The evaluation metric
 def RMSE(val, pred):
     diff = (val - pred) ** 2

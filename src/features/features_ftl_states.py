@@ -45,5 +45,15 @@ for type in reversed(types):
     target = target.join(df)
     target[name] = target[name].fillna(0)
 
+name='ftl_comms'
+u=ftl_all[ftl_all['flagcomms']==True]
+df=pd.DataFrame(index=target.index)
+df[name]=0
+rows=[]
+for ix,row in u.iterrows():
+    df.loc[row['utb_ms']:row['ute_ms']][name]=+1
+
 ftl_out = target.drop(config.target_cols, axis=1)
 ftl_out.fillna(method='ffill').fillna(method='bfill').to_pickle(config.features_folder + '/ftl_states.pkl')
+
+print "Done."

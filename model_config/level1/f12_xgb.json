@@ -1,0 +1,21 @@
+{
+  "modelname": "f12_xgb",
+  "n_jobs": 7,
+  "featureset": "f12",
+  "seed": 260580,
+  "num_round": 5000,
+  "early_stopping": true,
+  "booster": "gbtree",
+  "colsample_bytree": 0.7,
+  "silent": 1,
+  "eta": 0.05,
+  "nthread": 7,
+  "min_child_weight": 2.0,
+  "subsample": 1.0,
+  "random_state": 260580,
+  "objective": "reg:linear",
+  "model": "reg_xgb_tree",
+  "max_evals": 500,
+  "max_depth": 9.0,
+  "gamma": 0.7
+}

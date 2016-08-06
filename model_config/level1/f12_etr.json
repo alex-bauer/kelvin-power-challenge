@@ -1,0 +1,1 @@
+{"modelname": "f8_etr", "min_samples_leaf": 2, "n_estimators": 500, "max_features": "auto", "random_state": 260580, "featureset": "f12", "model": "reg_skl_etr" }
